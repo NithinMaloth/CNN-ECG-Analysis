@@ -58,7 +58,35 @@ test_generator = test_datagen.flow_from_directory(
 
 # Create the CNN model
 model = models.Sequential([
-    # ... Add convolutional, pooling, and fully connected layers as described earlier
+    Conv2D(64, (3, 3), activation='relu', padding='same', input_shape=input_shape),
+    Conv2D(64, (3, 3), activation='relu', padding='same'),
+    MaxPooling2D((2, 2), strides=(2, 2)),
+    
+    Conv2D(128, (3, 3), activation='relu', padding='same'),
+    Conv2D(128, (3, 3), activation='relu', padding='same'),
+    MaxPooling2D((2, 2), strides=(2, 2)),
+    
+    Conv2D(256, (3, 3), activation='relu', padding='same'),
+    Conv2D(256, (3, 3), activation='relu', padding='same'),
+    Conv2D(256, (3, 3), activation='relu', padding='same'),
+    MaxPooling2D((2, 2), strides=(2, 2)),
+    
+    Conv2D(512, (3, 3), activation='relu', padding='same'),
+    Conv2D(512, (3, 3), activation='relu', padding='same'),
+    Conv2D(512, (3, 3), activation='relu', padding='same'),
+    MaxPooling2D((2, 2), strides=(2, 2)),
+    
+    Conv2D(512, (3, 3), activation='relu', padding='same'),
+    Conv2D(512, (3, 3), activation='relu', padding='same'),
+    Conv2D(512, (3, 3), activation='relu', padding='same'),
+    MaxPooling2D((2, 2), strides=(2, 2)),
+    
+    Flatten(),
+    Dense(4096, activation='relu'),
+    Dropout(0.5),
+    Dense(4096, activation='relu'),
+    Dropout(0.5),
+    Dense(num_classes, activation='softmax')
 ])
 
 # Compile the model
